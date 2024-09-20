@@ -23,6 +23,11 @@ fi
 # EXPORTS
 #######################################################
 
+# ADO agent Specific exports
+export PATH="$PATH:$HOME/.dotnet/tools"
+export PATH="$PATH:/opt/mssql-tools/bin"
+export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+
 # Disable the bell
 if [[ $iatest > 0 ]]; then bind "set bell-style visible"; fi
 
