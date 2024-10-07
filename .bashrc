@@ -46,7 +46,9 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 # Allow ctrl-S for history navigation (with ctrl-R)
-stty -ixon
+if [ -t 0 ]; then
+  stty -ixon
+fi
 
 # Ignore case on auto-completion
 # Note: bind used instead of sticking these in .inputrc
