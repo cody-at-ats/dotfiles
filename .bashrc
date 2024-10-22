@@ -1,7 +1,9 @@
 # From https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c
 
 #!/bin/bash
-iatest=$(expr index "$-" i)
+
+# This way of testing doesn't seem to work so it's commented out.
+#iatest=$(expr index "$-" i)
 
 #######################################################
 # SOURCED ALIAS'S AND SCRIPTS BY zachbrowne.me
@@ -29,7 +31,7 @@ export PATH="$PATH:/opt/mssql-tools/bin"
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 
 # Disable the bell
-if [[ $iatest > 0 ]]; then bind "set bell-style visible"; fi
+if [[ $- == *i* ]]; then bind "set bell-style visible"; fi
 
 # Expand the history size
 export HISTFILESIZE=10000
@@ -52,10 +54,10 @@ fi
 
 # Ignore case on auto-completion
 # Note: bind used instead of sticking these in .inputrc
-if [[ $iatest > 0 ]]; then bind "set completion-ignore-case on"; fi
+if [[ $- == *i* ]]; then bind "set completion-ignore-case on"; fi
 
 # Show auto-completion list automatically, without double tab
-if [[ $iatest > 0 ]]; then bind "set show-all-if-ambiguous On"; fi
+if [[ $- == *i* ]]; then bind "set show-all-if-ambiguous On"; fi
 
 # Set the default editor
 export EDITOR=nano
