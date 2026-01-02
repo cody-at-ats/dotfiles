@@ -30,6 +30,8 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 export PATH="$PATH:/opt/mssql-tools/bin"
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 export DOTNET_ROOT=/usr/share/dotnet
+export EDITOR=vim
+export VISUAL=vim
 
 # Disable the bell
 if [[ $- == *i* ]]; then bind "set bell-style visible"; fi
