@@ -28,7 +28,7 @@ function mkdirg {
 
 # --- General Aliases ---
 
-New-Alias grep Select-String
+New-Alias -Force grep Select-String
 function c { Clear-Host }
 function da { Get-Date -Format "yyyy-MM-dd dddd HH:mm:ss" }
 function n { notepad $args }
@@ -157,11 +157,13 @@ function grsh  { git reset --hard @args }
 function gclean { git clean -fd }
 
 function Update-Dotfiles {
-  $repoDir = "$HOME\git\dotfiles"
+  # Check common repo locations
+  $repoCandidates = @("C:\git\dotfiles", "$HOME\git\dotfiles")
+  $repoDir = $repoCandidates | Where-Object { Test-Path "$_\.git" } | Select-Object -First 1
   $profileTarget = $PROFILE
 
-  if (Test-Path "$repoDir\.git") {
-    Write-Host "Pulling latest dotfiles..."
+  if ($repoDir) {
+    Write-Host "Pulling latest dotfiles from $repoDir ..."
     git -C $repoDir pull
     $isSymlink = (Get-Item $profileTarget -ErrorAction SilentlyContinue).LinkType -eq 'SymbolicLink'
     if (-not $isSymlink) {
@@ -171,12 +173,14 @@ function Update-Dotfiles {
     . $profileTarget
     Write-Host "Done — profile reloaded."
   } else {
-    Write-Host "Dotfiles repo not found at $repoDir"
-    Write-Host "Clone it first:"
-    Write-Host "  git clone git@github.com:cody-at-ats/dotfiles.git $repoDir"
+    Write-Host "Dotfiles repo not found. Clone it to one of:"
+    $repoCandidates | ForEach-Object { Write-Host "  git clone git@github.com:cody-at-ats/dotfiles.git $_" }
   }
 }
-New-Alias dotfiles-update Update-Dotfiles
+New-Alias -Force dotfiles-update Update-Dotfiles
+
+# Rename current branch locally and on remote
+function Rename-GitBranch {
   param(
     [Parameter(Mandatory = $true)]
     [string]$New
