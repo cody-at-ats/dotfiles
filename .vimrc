@@ -32,6 +32,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use Vim improvements over Vi; must be first
+set nocompatible
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -131,6 +134,23 @@ set foldcolumn=1
 
 " show line numbers
 set number
+set relativenumber              " relative numbers make j/k motion counts easy
+
+" Highlight current line
+set cursorline
+
+" Enable mouse in all modes (useful in terminals that support it)
+set mouse=a
+
+" Performance: only redraw when needed; hint to terminal we're fast
+set ttyfast
+
+" Open splits to the right/below instead of left/above
+set splitright
+set splitbelow
+
+" Security: disable modelines (can execute arbitrary code)
+set nomodeline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -274,6 +294,16 @@ set nobackup
 set nowb
 set noswapfile
 
+" Persistent undo — survive across sessions without plugins
+if has("persistent_undo")
+    let s:undodir = expand('~/.vim/undodir')
+    if !isdirectory(s:undodir)
+        call mkdir(s:undodir, "p", 0700)
+    endif
+    let &undodir = s:undodir
+    set undofile
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -291,6 +321,12 @@ set tabstop=4
 " Linebreak on 500 characters
 set lbr
 set tw=500
+
+" Define visible whitespace characters (toggle with :set list / :set nolist)
+set listchars=tab:›\ ,trail:·,nbsp:+
+
+" Show a visual ruler at column 80
+set colorcolumn=80
 
 set ai "Auto indent
 set si "Smart indent
@@ -377,6 +413,12 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
 map 0 ^
+
+" Make Y behave like D and C (yank to end of line)
+nnoremap Y y$
+
+" Prevent accidental Ex mode
+nnoremap Q <Nop>
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z

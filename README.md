@@ -9,6 +9,7 @@ Personal shell configs used across Windows (PowerShell), WSL (Bash), and WSL (Fi
 | `Microsoft.PowerShell_profile.ps1` | PowerShell 7 | `$PROFILE` (CurrentUserCurrentHost) |
 | `.bashrc` | Bash (WSL) | `~/.bashrc` |
 | `config.fish` | Fish (WSL) | `~/.config/fish/config.fish` |
+| `.vimrc` | Vim | `~/.vimrc` |
 
 ## Quick Start
 
@@ -28,6 +29,11 @@ ln -sf ~/git/dotfiles/.bashrc ~/.bashrc
 ```bash
 mkdir -p ~/.config/fish
 ln -sf ~/git/dotfiles/config.fish ~/.config/fish/config.fish
+```
+
+**Vim:**
+```bash
+ln -sf ~/git/dotfiles/.vimrc ~/.vimrc
 ```
 
 ## What's Inside
@@ -72,6 +78,37 @@ up <N>              cd up N levels (bash/fish)
 - **`sha1` / `sha256`** — quick file hashing via openssl
 - **`da`** — formatted date/time
 - **Prompt** — [Starship](https://starship.rs) (initialized if installed)
+
+### Vim
+
+Based on [amix/vimrc](https://github.com/amix/vimrc) (basic version) with a custom **OLED colorscheme** (pure `#000000` background) and practical developer additions. No plugins — drops cleanly onto any box with Vim 8+.
+
+| Setting | Value | Why |
+|---------|-------|-----|
+| `relativenumber` | on | j/k motion counts at a glance |
+| `cursorline` | on | easier to track position |
+| `mouse` | all modes | scroll + click in terminals |
+| `undofile` | `~/.vim/undodir` | persistent undo across sessions |
+| `splitright` / `splitbelow` | on | splits open where you expect |
+| `colorcolumn` | 80 | visual line-length guide |
+| `listchars` | defined | toggle whitespace with `:set list` |
+| `nomodeline` | on | security — prevents modeline exploits |
+| `Q` | `<Nop>` | prevents accidental Ex mode |
+| `Y` | `y$` | consistent with `D` and `C` |
+
+**Key mappings** (leader = `,`):
+
+| Mapping | Action |
+|---------|--------|
+| `,w` | Save file |
+| `<Space>` | Forward search |
+| `<C-hjkl>` | Move between splits |
+| `,bd` | Close buffer |
+| `,tn` / `,tc` / `,tl` | New / close / last tab |
+| `,ss` | Toggle spell check |
+| `,pp` | Toggle paste mode |
+| `Alt+j/k` | Move line up/down |
+| `*` / `#` (visual) | Search selected text |
 
 ### PowerShell — Extras
 
