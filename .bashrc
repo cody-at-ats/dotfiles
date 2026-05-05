@@ -223,6 +223,39 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 alias sha1='openssl sha1'
 
 #######################################################
+# GIT ALIAS'S
+#######################################################
+
+alias gs='git status'
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gca='git commit --amend'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gl='git pull'
+alias gf='git fetch'
+alias gfa='git fetch --all'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gbd='git branch -d'
+alias gm='git merge'
+alias grb='git rebase'
+alias gst='git stash'
+alias gstp='git stash pop'
+alias gstl='git stash list'
+alias glog='git log --oneline --graph --decorate'
+alias gloga='git log --oneline --graph --decorate --all'
+alias grs='git reset'
+alias grsh='git reset --hard'
+alias gclean='git clean -fd'
+
+#######################################################
 # SPECIAL FUNCTIONS
 #######################################################
 
