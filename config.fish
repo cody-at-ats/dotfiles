@@ -330,6 +330,8 @@ function chelp
 end
 
 
+# Returns last 2 path components of cwd
+function pwdtail
     pwd | awk -F/ '{nlast = NF -1; print $nlast"/"$NF}'
 end
 
