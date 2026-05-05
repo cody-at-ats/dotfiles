@@ -90,7 +90,7 @@ Based on [amix/vimrc](https://github.com/amix/vimrc) (basic version) with a cust
 | `mouse` | all modes | scroll + click in terminals |
 | `undofile` | `~/.vim/undodir` | persistent undo across sessions |
 | `splitright` / `splitbelow` | on | splits open where you expect |
-| `colorcolumn` | 80 | visual line-length guide |
+| `colorcolumn` | 160 | visual line-length guide |
 | `listchars` | defined | toggle whitespace with `:set list` |
 | `nomodeline` | on | security — prevents modeline exploits |
 | `Q` | `<Nop>` | prevents accidental Ex mode |

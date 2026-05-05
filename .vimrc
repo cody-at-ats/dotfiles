@@ -326,7 +326,7 @@ set tw=500
 set listchars=tab:›\ ,trail:·,nbsp:+
 
 " Show a visual ruler at column 80
-set colorcolumn=80
+set colorcolumn=160
 
 set ai "Auto indent
 set si "Smart indent
