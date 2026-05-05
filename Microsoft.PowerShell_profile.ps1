@@ -37,6 +37,68 @@ function e { code $args }
 # Open this profile in editor
 function profile { code $profile }
 
+function chelp {
+  $C = "`e[1;36m"; $Y = "`e[1;33m"; $R = "`e[0m"
+  Write-Host ""
+  Write-Host "${C}  ┌─────────────────────────────────────────────────────┐"
+  Write-Host "  │           POWERSHELL CONFIG QUICK REFERENCE         │"
+  Write-Host "  └─────────────────────────────────────────────────────┘${R}"
+
+  Write-Host "${C}  NAVIGATION${R}"
+  Write-Host "  ${Y}.. ... .... .....${R}  cd up 1-4 levels"
+  Write-Host "  ${Y}bd${R}               cd to previous dir"
+  Write-Host "  ${Y}home${R}             cd ~"
+  Write-Host "  ${Y}mkdirg <dir>${R}     mkdir + cd"
+  Write-Host ""
+
+  Write-Host "${C}  GIT${R}"
+  Write-Host "  ${Y}gs${R}               git status"
+  Write-Host "  ${Y}ga / gaa${R}         git add / add --all"
+  Write-Host "  ${Y}gc / gcm / gca${R}   commit / commit -m / amend"
+  Write-Host "  ${Y}gp / gpf${R}         push / push --force-with-lease"
+  Write-Host "  ${Y}gl${R}               pull"
+  Write-Host "  ${Y}gf / gfa${R}         fetch / fetch --all"
+  Write-Host "  ${Y}gd / gds${R}         diff / diff --staged"
+  Write-Host "  ${Y}gco / gcb${R}        checkout / checkout -b"
+  Write-Host "  ${Y}gb / gba / gbd${R}   branch / -a / -d"
+  Write-Host "  ${Y}gm / grb${R}         merge / rebase"
+  Write-Host "  ${Y}gst / gstp / gstl${R}   stash / pop / list"
+  Write-Host "  ${Y}glog / gloga${R}     log graph / all branches"
+  Write-Host "  ${Y}grs / grsh${R}       reset / reset --hard"
+  Write-Host "  ${Y}gclean${R}           git clean -fd"
+  Write-Host ""
+
+  Write-Host "${C}  GIT FUNCTIONS${R}"
+  Write-Host "  ${Y}Rename-GitBranch -New <name>${R}       rename current branch + remote"
+  Write-Host "  ${Y}Remove-GitStaleLocalBranches${R}       prune branches with no upstream"
+  Write-Host ""
+
+  Write-Host "${C}  SEARCH & INFO${R}"
+  Write-Host "  ${Y}dirs [pattern]${R}   recursive file list (like dir /s /b)"
+  Write-Host "  ${Y}da${R}               current date/time"
+  Write-Host "  ${Y}sha1/sha256 <f>${R}  file hashes"
+  Write-Host "  ${Y}List-Functions${R}   show all user-defined functions"
+  Write-Host ""
+
+  Write-Host "${C}  EDITORS & APPS${R}"
+  Write-Host "  ${Y}e <path>${R}         open in VS Code"
+  Write-Host "  ${Y}n <path>${R}         open in Notepad"
+  Write-Host "  ${Y}v${R}                open neovide (WSL)"
+  Write-Host "  ${Y}profile${R}          open this profile in VS Code"
+  Write-Host ""
+
+  Write-Host "${C}  UTILITIES${R}"
+  Write-Host "  ${Y}Remove-Bin <path>${R}              delete all bin/obj folders"
+  Write-Host "  ${Y}Remove-EmptyDirectories <path>${R} remove empty dirs"
+  Write-Host "  ${Y}Shrink-VHDX${R}                    compact WSL disk image"
+  Write-Host "  ${Y}Restore-DatabaseBackups <dir>${R}  restore .bak files to SQL Server"
+  Write-Host "  ${Y}Shrink-Database-Logs${R}           shrink SQL log files"
+  Write-Host "  ${Y}Clear-AzureQueues${R}              cancel queued ADO builds (needs AZURE_DEVOPS_PAT)"
+  Write-Host "  ${Y}New-AzDoWorkItem${R}               create ADO work item via python script"
+  Write-Host "  ${Y}chelp${R}                          this help"
+  Write-Host ""
+}
+
 # Launch neovide connected to WSL
 function v { Set-Location \\wsl.localhost\Ubuntu\home\cody\git; neovide --wsl }
 

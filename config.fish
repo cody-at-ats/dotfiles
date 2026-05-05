@@ -263,8 +263,72 @@ function extract
     end
 end
 
-# Returns last 2 path components of cwd
-function pwdtail
+function chelp
+    set_color cyan; echo ""
+    echo "  ┌─────────────────────────────────────────────────────┐"
+    echo "  │              FISH CONFIG QUICK REFERENCE            │"
+    echo "  └─────────────────────────────────────────────────────┘"
+    set_color normal
+
+    set_color cyan;  echo "  NAVIGATION";           set_color normal
+    set_color yellow; echo -n "  .. ... .... .....  "; set_color normal; echo "cd up 1-4 levels"
+    set_color yellow; echo -n "  bd                 "; set_color normal; echo "cd to previous dir"
+    set_color yellow; echo -n "  home               "; set_color normal; echo "cd ~"
+    set_color yellow; echo -n "  mkdirg <dir>       "; set_color normal; echo "mkdir + cd"
+    set_color yellow; echo -n "  up <N>             "; set_color normal; echo "cd up N levels"
+    echo ""
+
+    set_color cyan;  echo "  LISTING";              set_color normal
+    set_color yellow; echo -n "  la ll lt lk lx     "; set_color normal; echo "hidden / long / by-date / by-size / by-ext"
+    set_color yellow; echo -n "  ldir lf            "; set_color normal; echo "dirs only / files only"
+    set_color yellow; echo -n "  lr                 "; set_color normal; echo "recursive ls"
+    echo ""
+
+    set_color cyan;  echo "  GIT";                  set_color normal
+    set_color yellow; echo -n "  gs                 "; set_color normal; echo "git status"
+    set_color yellow; echo -n "  ga / gaa           "; set_color normal; echo "git add / add --all"
+    set_color yellow; echo -n "  gc / gcm / gca     "; set_color normal; echo "commit / commit -m / amend"
+    set_color yellow; echo -n "  gp / gpf           "; set_color normal; echo "push / push --force-with-lease"
+    set_color yellow; echo -n "  gl                 "; set_color normal; echo "pull"
+    set_color yellow; echo -n "  gf / gfa           "; set_color normal; echo "fetch / fetch --all"
+    set_color yellow; echo -n "  gd / gds           "; set_color normal; echo "diff / diff --staged"
+    set_color yellow; echo -n "  gco / gcb          "; set_color normal; echo "checkout / checkout -b"
+    set_color yellow; echo -n "  gb / gba / gbd     "; set_color normal; echo "branch / -a / -d"
+    set_color yellow; echo -n "  gm / grb           "; set_color normal; echo "merge / rebase"
+    set_color yellow; echo -n "  gst / gstp / gstl  "; set_color normal; echo "stash / pop / list"
+    set_color yellow; echo -n "  glog / gloga       "; set_color normal; echo "log graph / all branches"
+    set_color yellow; echo -n "  grs / grsh         "; set_color normal; echo "reset / reset --hard"
+    set_color yellow; echo -n "  gclean             "; set_color normal; echo "git clean -fd"
+    echo ""
+
+    set_color cyan;  echo "  ARCHIVES";             set_color normal
+    set_color yellow; echo -n "  extract <file>     "; set_color normal; echo "extract any archive format"
+    set_color yellow; echo -n "  mktar/mkgz/mkbz2   "; set_color normal; echo "create archives"
+    set_color yellow; echo -n "  untar/ungz/unbz2   "; set_color normal; echo "extract archives"
+    echo ""
+
+    set_color cyan;  echo "  SEARCH & INFO";        set_color normal
+    set_color yellow; echo -n "  h <term>           "; set_color normal; echo "search history"
+    set_color yellow; echo -n "  f <term>           "; set_color normal; echo "find files"
+    set_color yellow; echo -n "  p <term>           "; set_color normal; echo "search processes"
+    set_color yellow; echo -n "  ftext <term>       "; set_color normal; echo "grep recursively in cwd"
+    set_color yellow; echo -n "  topcpu             "; set_color normal; echo "top 10 CPU processes"
+    echo ""
+
+    set_color cyan;  echo "  UTILITIES";            set_color normal
+    set_color yellow; echo -n "  da                 "; set_color normal; echo "current date/time"
+    set_color yellow; echo -n "  sha1 / sha256      "; set_color normal; echo "file hashes"
+    set_color yellow; echo -n "  cls                "; set_color normal; echo "clear screen"
+    set_color yellow; echo -n "  diskspace          "; set_color normal; echo "disk usage sorted"
+    set_color yellow; echo -n "  folders            "; set_color normal; echo "dir sizes (depth 1)"
+    set_color yellow; echo -n "  mountedinfo        "; set_color normal; echo "df -hT"
+    set_color yellow; echo -n "  openports          "; set_color normal; echo "list open ports"
+    set_color yellow; echo -n "  ver                "; set_color normal; echo "OS version info"
+    set_color yellow; echo -n "  efrc               "; set_color normal; echo "edit config.fish"
+    echo ""
+end
+
+
     pwd | awk -F/ '{nlast = NF -1; print $nlast"/"$NF}'
 end
 
