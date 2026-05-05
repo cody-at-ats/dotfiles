@@ -1,6 +1,13 @@
 # config.fish
 # Fish equivalent of .bashrc — adapted from zachbrowne.me base config
 
+if status is-interactive
+    # Starship prompt — install from https://starship.rs
+    if type -q starship
+        starship init fish | source
+    end
+end
+
 #######################################################
 # PATH & ENVIRONMENT
 #######################################################
@@ -10,8 +17,8 @@ fish_add_path /opt/mssql-tools/bin
 
 set -gx REQUESTS_CA_BUNDLE /etc/ssl/certs/ca-certificates.crt
 set -gx DOTNET_ROOT /usr/share/dotnet
-set -gx EDITOR vim
-set -gx VISUAL vim
+set -gx EDITOR nvim
+set -gx VISUAL nvim
 
 # Colored man pages via less
 set -gx LESS_TERMCAP_mb \e'[01;31m'
@@ -154,7 +161,9 @@ alias gclean='git clean -fd'
 
 # Use best available editor
 function edit
-    if type -q jpico
+    if type -q nvim
+        nvim $argv
+    else if type -q jpico
         jpico -nonotice -linums -nobackups $argv
     else if type -q nano
         nano -c $argv
@@ -166,7 +175,9 @@ function edit
 end
 
 function sedit
-    if type -q jpico
+    if type -q nvim
+        sudo nvim $argv
+    else if type -q jpico
         sudo jpico -nonotice -linums -nobackups $argv
     else if type -q nano
         sudo nano -c $argv
@@ -324,6 +335,12 @@ function whatsmyip
     echo
 end
 alias whatismyip='whatsmyip'
+
+# pnpm
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+    fish_add_path $PNPM_HOME
+end
 
 # rot13
 function rot13
