@@ -325,6 +325,7 @@ function chelp
     set_color yellow; echo -n "  openports          "; set_color normal; echo "list open ports"
     set_color yellow; echo -n "  ver                "; set_color normal; echo "OS version info"
     set_color yellow; echo -n "  efrc               "; set_color normal; echo "edit config.fish"
+    set_color yellow; echo -n "  dotfiles-update    "; set_color normal; echo "pull latest config from repo"
     echo ""
 end
 
@@ -417,6 +418,22 @@ function rot13
 end
 
 # Trim leading/trailing whitespace
-function trim
-    string trim $argv
+function dotfiles-update
+    set -l repo_dir $HOME/git/dotfiles
+    set -l fish_cfg $HOME/.config/fish/config.fish
+
+    if test -d $repo_dir/.git
+        echo "Pulling latest dotfiles..."
+        git -C $repo_dir pull
+        if not test -L $fish_cfg
+            cp $repo_dir/config.fish $fish_cfg
+            echo "Copied config.fish to ~/.config/fish/"
+        end
+        source $fish_cfg
+        echo "Done — config reloaded."
+    else
+        echo "Dotfiles repo not found at $repo_dir"
+        echo "Clone it first:"
+        echo "  git clone git@github.com:cody-at-ats/dotfiles.git $repo_dir"
+    end
 end

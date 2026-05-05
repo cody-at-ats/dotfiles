@@ -90,3 +90,19 @@ up <N>              cd up N levels (bash/fish)
 ## Help
 
 Run `chelp` in any shell for a colour-coded in-terminal cheatsheet.
+
+## Auto-update
+
+Each config includes a command that pulls the latest version from this repo and reloads itself.
+
+> **Requires** the repo to be cloned at `~/git/dotfiles`. If it's not there yet, clone it first (see Quick Start).
+
+| Shell | Command |
+|-------|---------|
+| Bash | `dotfiles-update` |
+| Fish | `dotfiles-update` |
+| PowerShell | `Update-Dotfiles` (alias: `dotfiles-update`) |
+
+- If the config file is a **symlink** into the repo, only `git pull` is run — the symlink already points to the updated file.
+- If the config file is a **copy**, the updated file is copied to the target location after pulling.
+- The config is **re-sourced automatically** so changes take effect immediately without opening a new shell.

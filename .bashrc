@@ -316,7 +316,26 @@ chelp() {
 	echo -e "  ${Y}openports${R}       list open ports"
 	echo -e "  ${Y}ver${R}             OS version info"
 	echo -e "  ${Y}ebrc${R}            edit ~/.bashrc"
+	echo -e "  ${Y}dotfiles-update${R} pull latest config from repo"
 	echo ""
+}
+
+dotfiles-update() {
+	local REPO_DIR="$HOME/git/dotfiles"
+	if [ -d "$REPO_DIR/.git" ]; then
+		echo "Pulling latest dotfiles..."
+		git -C "$REPO_DIR" pull
+		if [ ! -L "$HOME/.bashrc" ]; then
+			cp "$REPO_DIR/.bashrc" "$HOME/.bashrc"
+			echo "Copied .bashrc to ~/"
+		fi
+		source "$HOME/.bashrc"
+		echo "Done — config reloaded."
+	else
+		echo "Dotfiles repo not found at $REPO_DIR"
+		echo "Clone it first:"
+		echo "  git clone git@github.com:cody-at-ats/dotfiles.git $REPO_DIR"
+	fi
 }
 
 # Use the best version of pico installed

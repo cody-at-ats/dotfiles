@@ -96,6 +96,7 @@ function chelp {
   Write-Host "  ${Y}Clear-AzureQueues${R}              cancel queued ADO builds (needs AZURE_DEVOPS_PAT)"
   Write-Host "  ${Y}New-AzDoWorkItem${R}               create ADO work item via python script"
   Write-Host "  ${Y}chelp${R}                          this help"
+  Write-Host "  ${Y}Update-Dotfiles${R}                pull latest config from repo"
   Write-Host ""
 }
 
@@ -155,8 +156,27 @@ function grs   { git reset @args }
 function grsh  { git reset --hard @args }
 function gclean { git clean -fd }
 
-# Rename current branch locally and on remote
-function Rename-GitBranch {
+function Update-Dotfiles {
+  $repoDir = "$HOME\git\dotfiles"
+  $profileTarget = $PROFILE
+
+  if (Test-Path "$repoDir\.git") {
+    Write-Host "Pulling latest dotfiles..."
+    git -C $repoDir pull
+    $isSymlink = (Get-Item $profileTarget -ErrorAction SilentlyContinue).LinkType -eq 'SymbolicLink'
+    if (-not $isSymlink) {
+      Copy-Item "$repoDir\Microsoft.PowerShell_profile.ps1" $profileTarget
+      Write-Host "Copied profile to $profileTarget"
+    }
+    . $profileTarget
+    Write-Host "Done — profile reloaded."
+  } else {
+    Write-Host "Dotfiles repo not found at $repoDir"
+    Write-Host "Clone it first:"
+    Write-Host "  git clone git@github.com:cody-at-ats/dotfiles.git $repoDir"
+  }
+}
+New-Alias dotfiles-update Update-Dotfiles
   param(
     [Parameter(Mandatory = $true)]
     [string]$New
