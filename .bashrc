@@ -221,6 +221,7 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 
 # SHA1
 alias sha1='openssl sha1'
+alias sha256='openssl sha256'
 
 #######################################################
 # GIT ALIAS'S
