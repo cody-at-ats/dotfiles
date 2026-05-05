@@ -119,8 +119,14 @@ alias rebootforce='sudo shutdown -r -n now'
 # Misc
 alias sha1='openssl sha1'
 alias sha256='openssl sha256'
-alias logs='sudo find /var/log -type f -exec file {} \; | grep text | cut -d: -f1 | grep -v [0-9]$ | xargs tail -f'
-alias alert='notify-send --urgency=low -i (test $status -eq 0 && echo terminal || echo error) (history | tail -n1 | sed -e "s/^\s*[0-9]\+\s*//" -e "s/[;&|]\s*alert\$//")'
+function logs
+    sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d: -f1 | grep -v '[0-9]$' | xargs tail -f
+end
+function alert
+    set -l msg (history | tail -n1 | sed -e 's/^\s*[0-9]\+\s*//' -e 's/[;&|]\s*alert$//')
+    set -l icon (test $status -eq 0; and echo terminal; or echo error)
+    notify-send --urgency=low -i $icon $msg
+end
 alias web='cd /var/www/html'
 
 #######################################################
